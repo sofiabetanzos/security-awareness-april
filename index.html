@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Awareness | Rokt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --beetroot: #C20075;
+      --wine: #480029;
+      --black: #000000;
+      --white: #FFFFFF;
+      --gray-900: #6E6E73;
+      --gray-800: #86868B;
+      --gray-600: #E0E0E4;
+      --gray-300: #F8F8FA;
+    }
+
+    body {
+      font-family: 'Archivo', sans-serif;
+      background-color: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 640px;
+      width: 100%;
+      text-align: center;
+      animation: fadeUp 0.8s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .eyebrow {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--beetroot);
+      margin-bottom: 1.5rem;
+    }
+
+    .icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    h1 .highlight {
+      color: var(--beetroot);
+    }
+
+    .standfirst {
+      font-weight: 500;
+      font-size: 1.25rem;
+      color: var(--gray-800);
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+
+    .card {
+      background: var(--wine);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .card h2 {
+      font-weight: 600;
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+
+    .card p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--gray-600);
+    }
+
+    .card p + p {
+      margin-top: 1rem;
+    }
+
+    .tips {
+      background: var(--gray-300);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .tips h2 {
+      font-weight: 600;
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+      color: var(--black);
+    }
+
+    .tips ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tips li {
+      font-size: 0.975rem;
+      line-height: 1.6;
+      color: var(--black);
+      padding: 0.5rem 0;
+      padding-left: 1.75rem;
+      position: relative;
+    }
+
+    .tips li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.85rem;
+      width: 8px;
+      height: 8px;
+      background: var(--beetroot);
+      border-radius: 50%;
+    }
+
+    .stat-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-900);
+      margin-bottom: 0.75rem;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat {
+      flex: 1;
+      background: var(--wine);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .stat .number {
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--beetroot);
+      display: block;
+    }
+
+    .stat .label {
+      font-size: 0.8rem;
+      color: var(--gray-800);
+      margin-top: 0.25rem;
+      display: block;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--beetroot);
+      border-radius: 2px;
+      margin: 2.5rem auto;
+    }
+
+    .footer-note {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+
+    .footer-note a {
+      color: var(--beetroot);
+      text-decoration: none;
+    }
+
+    .footer-note a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      .standfirst {
+        font-size: 1.05rem;
+      }
+
+      .stat-row {
+        flex-direction: column;
+      }
+
+      .card, .tips {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="eyebrow">Security Awareness &middot; April 2026</span>
+    <span class="icon" role="img" aria-label="fishing rod">&#127907;</span>
+    <h1>Gotcha! &#129325;<br>You took the <span class="highlight">bait.</span></h1>
+    <p class="standfirst">
+      You just scanned a mystery QR code with zero hesitation. We love the curiosity &mdash; but an attacker would too.
+      Don't worry, this one's harmless. Consider it a free lesson. &#127873;
+    </p>
+
+    <p class="stat-label">Global phishing stats &mdash; not Rokt-specific</p>
+    <div class="stat-row">
+      <div class="stat">
+        <span class="number">5&times;</span>
+        <span class="label">increase in QR phishing attacks in 2025</span>
+      </div>
+      <div class="stat">
+        <span class="number">60%</span>
+        <span class="label">higher click rate on AI-crafted phishing</span>
+      </div>
+      <div class="stat">
+        <span class="number">$4.88M</span>
+        <span class="label">avg cost of a phishing breach</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>So&hellip; what just happened?</h2>
+      <p>
+        This QR code was planted around the office by your friendly neighbourhood Security team as part of Rokt's April Fools awareness campaign. You scanned it on impulse &mdash; and that's exactly the reflex attackers count on.
+      </p>
+      <p>
+        In the wild, a dodgy QR code can send you to a fake login page, kick off a malware download, or connect you to an attacker's network.
+      </p>
+    </div>
+
+    <div class="tips">
+      <h2>Next time, hit pause and ask:</h2>
+      <ul>
+        <li>Do I know who placed this QR code and why?</li>
+        <li>Would I click this link if it came in an email from a stranger?</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Spotted something sketchy? &#128064;</h2>
+      <p>
+        Message the Security team on Google Chat or come say hi on the 7th floor. The only bad report is the one you didn't make.
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="footer-note">
+      Rokt Security Engineering &middot; April 2026<br>
+      Don't be an April Fool &mdash; think before you scan.
+    </p>
+  </div>
+</body>
+</html>
