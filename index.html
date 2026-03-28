@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security Awareness | Rokt</title>
+  <title>Security Awareness</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       margin: 0;
@@ -15,18 +15,19 @@
     }
 
     :root {
-      --beetroot: #C20075;
-      --wine: #480029;
-      --black: #000000;
+      --accent: #2563EB;
+      --accent-light: #3B82F6;
+      --accent-bg: #1E3A5F;
+      --black: #0F172A;
       --white: #FFFFFF;
-      --gray-900: #6E6E73;
-      --gray-800: #86868B;
-      --gray-600: #E0E0E4;
-      --gray-300: #F8F8FA;
+      --gray-100: #F1F5F9;
+      --gray-400: #94A3B8;
+      --gray-500: #64748B;
+      --gray-700: #334155;
     }
 
     body {
-      font-family: 'Archivo', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: var(--black);
       color: var(--white);
       min-height: 100vh;
@@ -57,11 +58,11 @@
     }
 
     .eyebrow {
-      font-family: 'Roboto Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--beetroot);
+      color: var(--accent-light);
       margin-bottom: 1.5rem;
     }
 
@@ -86,19 +87,19 @@
     }
 
     h1 .highlight {
-      color: var(--beetroot);
+      color: var(--accent-light);
     }
 
     .standfirst {
       font-weight: 500;
       font-size: 1.25rem;
-      color: var(--gray-800);
+      color: var(--gray-400);
       margin-bottom: 2.5rem;
       line-height: 1.5;
     }
 
     .card {
-      background: var(--wine);
+      background: var(--accent-bg);
       border-radius: 16px;
       padding: 2rem;
       text-align: left;
@@ -115,7 +116,7 @@
     .card p {
       font-size: 1rem;
       line-height: 1.7;
-      color: var(--gray-600);
+      color: var(--gray-100);
     }
 
     .card p + p {
@@ -123,7 +124,7 @@
     }
 
     .tips {
-      background: var(--gray-300);
+      background: var(--gray-100);
       border-radius: 16px;
       padding: 2rem;
       text-align: left;
@@ -152,22 +153,19 @@
     }
 
     .tips li::before {
-      content: '';
+      content: '\1F6E1\FE0F';
       position: absolute;
       left: 0;
-      top: 0.85rem;
-      width: 8px;
-      height: 8px;
-      background: var(--beetroot);
-      border-radius: 50%;
+      top: 0.45rem;
+      font-size: 0.85rem;
     }
 
     .stat-label {
-      font-family: 'Roboto Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--gray-900);
+      color: var(--gray-500);
       margin-bottom: 0.75rem;
     }
 
@@ -179,7 +177,7 @@
 
     .stat {
       flex: 1;
-      background: var(--wine);
+      background: var(--accent-bg);
       border-radius: 12px;
       padding: 1.25rem;
       text-align: center;
@@ -188,13 +186,13 @@
     .stat .number {
       font-weight: 700;
       font-size: 2rem;
-      color: var(--beetroot);
+      color: var(--accent-light);
       display: block;
     }
 
     .stat .label {
       font-size: 0.8rem;
-      color: var(--gray-800);
+      color: var(--gray-400);
       margin-top: 0.25rem;
       display: block;
     }
@@ -202,25 +200,16 @@
     .divider {
       width: 48px;
       height: 3px;
-      background: var(--beetroot);
+      background: var(--accent);
       border-radius: 2px;
       margin: 2.5rem auto;
     }
 
     .footer-note {
-      font-family: 'Roboto Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
-      color: var(--gray-900);
+      color: var(--gray-500);
       line-height: 1.6;
-    }
-
-    .footer-note a {
-      color: var(--beetroot);
-      text-decoration: none;
-    }
-
-    .footer-note a:hover {
-      text-decoration: underline;
     }
 
     @media (max-width: 480px) {
@@ -244,15 +233,15 @@
 </head>
 <body>
   <div class="container">
-    <span class="eyebrow">Security Awareness &middot; April 2026</span>
-    <span class="icon" role="img" aria-label="fishing rod">&#127907;</span>
+    <span class="eyebrow">&#x1F6E1;&#xFE0F; Security Awareness &middot; April 2026</span>
+    <span class="icon" role="img" aria-label="shield">&#x1F6E1;&#xFE0F;</span>
     <h1>Gotcha! &#129325;<br>You took the <span class="highlight">bait.</span></h1>
     <p class="standfirst">
       You just scanned a mystery QR code with zero hesitation. We love the curiosity &mdash; but an attacker would too.
       Don't worry, this one's harmless. Consider it a free lesson. &#127873;
     </p>
 
-    <p class="stat-label">Global phishing stats &mdash; not Rokt-specific</p>
+    <p class="stat-label">Global phishing stats &mdash; not company-specific</p>
     <div class="stat-row">
       <div class="stat">
         <span class="number">5&times;</span>
@@ -271,7 +260,7 @@
     <div class="card">
       <h2>So&hellip; what just happened?</h2>
       <p>
-        This QR code was planted around the office by your friendly neighbourhood Security team as part of Rokt's April Fools awareness campaign. You scanned it on impulse &mdash; and that's exactly the reflex attackers count on.
+        This QR code was planted around the office by your friendly neighbourhood Security team as part of our April Fools awareness campaign. You scanned it on impulse &mdash; and that's exactly the reflex attackers count on.
       </p>
       <p>
         In the wild, a dodgy QR code can send you to a fake login page, kick off a malware download, or connect you to an attacker's network.
@@ -296,7 +285,7 @@
     <div class="divider"></div>
 
     <p class="footer-note">
-      Rokt Security Engineering &middot; April 2026<br>
+      &#x1F6E1;&#xFE0F; Security Engineering &middot; April 2026<br>
       Don't be an April Fool &mdash; think before you scan.
     </p>
   </div>
