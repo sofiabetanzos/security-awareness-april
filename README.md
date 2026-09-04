@@ -31,7 +31,9 @@ Then open:
 - Purple ghost: insider risk, anticipates the player's route
 - Grey ghost: supply-chain risk, unpredictable turns
 
-The high score is saved locally in the browser. A collision ends the game; collecting all points wins and unlocks the Security Champion banner.
+Players enter their name before starting. Completed runs are submitted to a shared Supabase leaderboard, and the five highest scores are shown across phones and laptops. The personal high score is also saved locally in the browser. A collision ends the game; collecting all points wins and unlocks the Security Champion banner.
+
+The leaderboard schema and its row-level security policies are documented in `supabase/leaderboard.sql`. Public visitors may read scores and submit a name plus score, but cannot update or delete leaderboard records.
 
 ## Presentation QR
 

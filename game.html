@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f4f1f2">
-  <meta name="description" content="Prashanth-Man: collect the data, dodge cyber threats, and isolate the malicious QR code.">
+  <meta name="description" content="Prashanth-Man: collect every point, dodge cyber threats, and become a Security Champion.">
   <title>Prashanth-Man | Security Arcade</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,7 +65,7 @@
         </div>
       </div>
 
-      <aside class="score-panel" aria-label="Objective and points remaining">
+      <aside class="score-panel" aria-label="Objective, points remaining, and leaderboard">
         <div class="qr-mission">
           <div class="point-cluster" aria-hidden="true">
             <span></span><span></span><span></span><span></span><span></span>
@@ -78,6 +78,14 @@
           <span class="counter-rule"></span>
           <p>Collect every grey point to become a Security Champion.</p>
         </div>
+        <section class="leaderboard" aria-labelledby="leaderboard-title">
+          <div class="leaderboard-heading">
+            <small>TOP 5 PLAYERS</small>
+            <h2 id="leaderboard-title">LEADERBOARD</h2>
+          </div>
+          <ol id="leaderboard-list" class="leaderboard-list" aria-live="polite"></ol>
+          <p id="leaderboard-status" class="leaderboard-status">Loading scores…</p>
+        </section>
       </aside>
 
     </section>

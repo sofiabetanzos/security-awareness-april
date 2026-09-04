@@ -1,6 +1,8 @@
 /* global Phaser */
 
 const TILE = 32;
+const LEADERBOARD_URL = 'https://ggxmrrnofgljtaiqxhmp.supabase.co/rest/v1/leaderboard';
+const LEADERBOARD_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdneG1ycm5vZmdsanRhaXF4aG1wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg0OTEwMTIsImV4cCI6MjEwNDA2NzAxMn0.9rj4ynEfTrQSuyA26MUFvEN9y-Sd6WedOxIJYx3_uXA';
 // Phaser Text objects are raster textures, so render those above 1×.
 const TEXT_RESOLUTION = Math.min(
   3,
@@ -44,7 +46,9 @@ const dom = {
   remaining: document.getElementById('remaining'),
   status: document.getElementById('status-label'),
   sound: document.getElementById('sound-button'),
-  pause: document.getElementById('pause-button')
+  pause: document.getElementById('pause-button'),
+  leaderboard: document.getElementById('leaderboard-list'),
+  leaderboardStatus: document.getElementById('leaderboard-status')
 };
 
 let sceneRef;
@@ -60,6 +64,8 @@ let highScore = readHighScore();
 let soundMuted = false;
 let audioContext;
 let lastDotSound = 0;
+let playerName = '';
+let scoreSubmitted = false;
 
 const config = {
   type: Phaser.AUTO,
@@ -76,6 +82,7 @@ const config = {
 
 new Phaser.Game(config);
 renderScore();
+loadLeaderboard();
 
 function preload() {
   this.load.image('prashanth', 'assets/prashanth.png');
@@ -88,6 +95,7 @@ function create() {
   ghosts = [];
   dots = [];
   gameMode = 'ready';
+  scoreSubmitted = false;
 
   drawMaze(this);
   createCollectibles(this);
@@ -388,6 +396,7 @@ function finishGame(won, threatType) {
   updateHighScore();
   updateStatus(won ? 'CHAMPION UNLOCKED' : 'BREACH DETECTED', won ? 'ready' : 'danger');
   playTone(won ? 720 : 125, won ? .22 : .35, won ? 'sine' : 'sawtooth');
+  submitScore();
 
   if (!won) {
     sceneRef.tweens.add({ targets: player.view, alpha: 0, angle: 16, scale: .25, duration: 450, ease: 'Back.easeIn' });
@@ -399,26 +408,79 @@ function finishGame(won, threatType) {
 }
 
 function createStartOverlay(scene) {
-  const overlay = scene.add.container(config.width / 2, config.height / 2).setDepth(100);
-  const backdrop = scene.add.rectangle(0, 0, config.width, config.height, 0x171316, .93);
-  const accent = scene.add.rectangle(0, -146, 74, 7, 0xd11269, 1);
-  const label = scene.add.text(0, -116, 'SECURITY ARCADE', textStyle(13, '#ff4b9a')).setOrigin(.5);
-  const title = scene.add.text(0, -71, 'PRASHANTH–MAN', textStyle(29, '#ffffff', 'Bungee')).setOrigin(.5);
-  const copy = scene.add.text(0, -5, 'Collect every point.\nAvoid all three threats.', {
-    fontFamily: 'DM Sans', fontSize: '17px', color: '#d8cfd3', align: 'center', lineSpacing: 7
-  }).setOrigin(.5);
-  const buttonBg = scene.add.rectangle(0, 82, 230, 52, 0xd11269, 1).setInteractive({ useHandCursor: true });
-  const buttonLabel = scene.add.text(0, 82, 'START MISSION', textStyle(14, '#ffffff', 'Bungee')).setOrigin(.5);
+  const overlay = document.createElement('div');
+  overlay.className = 'game-state-overlay game-start-overlay';
 
-  overlay.add([backdrop, accent, label, title, copy, buttonBg, buttonLabel]);
-  buttonBg.on('pointerover', () => buttonBg.setFillStyle(0xeb1d78));
-  buttonBg.on('pointerout', () => buttonBg.setFillStyle(0xd11269));
-  buttonBg.on('pointerdown', () => {
+  const card = document.createElement('section');
+  card.className = 'start-card';
+  card.setAttribute('role', 'dialog');
+  card.setAttribute('aria-modal', 'true');
+  card.setAttribute('aria-labelledby', 'start-state-title');
+
+  const kicker = document.createElement('p');
+  kicker.className = 'start-card__kicker';
+  kicker.textContent = 'SECURITY ARCADE';
+
+  const title = document.createElement('h2');
+  title.id = 'start-state-title';
+  title.textContent = 'PRASHANTH–MAN';
+
+  const copy = document.createElement('p');
+  copy.className = 'start-card__copy';
+  copy.textContent = 'Enter your name, collect every point, and dodge all three threats.';
+
+  const form = document.createElement('form');
+  form.className = 'player-form';
+
+  const label = document.createElement('label');
+  label.htmlFor = 'player-name';
+  label.textContent = 'YOUR NAME';
+
+  const input = document.createElement('input');
+  input.id = 'player-name';
+  input.name = 'player-name';
+  input.type = 'text';
+  input.maxLength = 20;
+  input.autocomplete = 'name';
+  input.enterKeyHint = 'go';
+  input.placeholder = 'Type your name';
+  input.required = true;
+  input.value = readPlayerName();
+
+  const error = document.createElement('p');
+  error.className = 'player-form__error';
+  error.setAttribute('aria-live', 'polite');
+
+  const button = document.createElement('button');
+  button.type = 'submit';
+  button.className = 'end-card__button';
+  button.textContent = 'START MISSION';
+
+  form.append(label, input, error, button);
+  card.append(kicker, title, copy, form);
+  overlay.append(card);
+  document.getElementById('game-canvas').append(overlay);
+  window.requestAnimationFrame(() => overlay.classList.add('is-visible'));
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = normalizeName(input.value);
+    if (!name) {
+      error.textContent = 'Enter your name to join the leaderboard.';
+      input.focus();
+      return;
+    }
+
+    playerName = name;
+    savePlayerName(name);
     startAudio();
     gameMode = 'running';
     updateStatus('DEFENSE ACTIVE', 'ready');
-    scene.tweens.add({ targets: overlay, alpha: 0, duration: 220, onComplete: () => overlay.destroy(true) });
+    overlay.classList.remove('is-visible');
+    window.setTimeout(() => overlay.remove(), 220);
   });
+
+  window.setTimeout(() => input.focus(), 100);
 }
 
 function createEndOverlay(scene, won, threatType) {
@@ -570,6 +632,80 @@ function updateHighScore() {
   try { localStorage.setItem('prashanth-man-high-score', String(highScore)); }
   catch (_error) { /* Storage may be unavailable in private browsing. */ }
   renderScore();
+}
+
+async function loadLeaderboard() {
+  dom.leaderboardStatus.classList.remove('is-error');
+  dom.leaderboardStatus.textContent = 'Loading scores…';
+
+  try {
+    const response = await fetch(`${LEADERBOARD_URL}?select=player_name,score&order=score.desc,created_at.asc&limit=5`, {
+      headers: { apikey: LEADERBOARD_KEY }
+    });
+    if (!response.ok) throw new Error(`Leaderboard request failed with ${response.status}`);
+
+    const entries = await response.json();
+    renderLeaderboard(entries);
+    dom.leaderboardStatus.textContent = entries.length ? 'Scores update after every game.' : 'No scores yet — be the first.';
+  } catch (_error) {
+    dom.leaderboard.replaceChildren();
+    dom.leaderboardStatus.classList.add('is-error');
+    dom.leaderboardStatus.textContent = 'Leaderboard temporarily unavailable. You can still play.';
+  }
+}
+
+function renderLeaderboard(entries) {
+  dom.leaderboard.replaceChildren();
+  entries.forEach((entry) => {
+    const row = document.createElement('li');
+    const name = document.createElement('span');
+    const points = document.createElement('strong');
+
+    name.className = 'leaderboard-name';
+    name.textContent = normalizeName(entry.player_name) || 'PLAYER';
+    points.className = 'leaderboard-score';
+    points.textContent = String(Math.max(0, Number(entry.score) || 0)).padStart(6, '0');
+    row.append(name, points);
+    dom.leaderboard.append(row);
+  });
+}
+
+async function submitScore() {
+  if (scoreSubmitted || !playerName) return;
+  scoreSubmitted = true;
+  dom.leaderboardStatus.classList.remove('is-error');
+  dom.leaderboardStatus.textContent = 'Saving your score…';
+
+  try {
+    const response = await fetch(LEADERBOARD_URL, {
+      method: 'POST',
+      headers: {
+        apikey: LEADERBOARD_KEY,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal'
+      },
+      body: JSON.stringify({ player_name: playerName, score: Math.max(0, Math.round(score)) })
+    });
+    if (!response.ok) throw new Error(`Score submission failed with ${response.status}`);
+    await loadLeaderboard();
+  } catch (_error) {
+    dom.leaderboardStatus.classList.add('is-error');
+    dom.leaderboardStatus.textContent = 'Score could not be saved. The game still works.';
+  }
+}
+
+function normalizeName(value) {
+  return String(value || '').replace(/\s+/g, ' ').trim().slice(0, 20);
+}
+
+function readPlayerName() {
+  try { return normalizeName(localStorage.getItem('prashanth-man-player-name')); }
+  catch (_error) { return ''; }
+}
+
+function savePlayerName(name) {
+  try { localStorage.setItem('prashanth-man-player-name', name); }
+  catch (_error) { /* Storage may be unavailable in private browsing. */ }
 }
 
 function center(index) { return index * TILE + TILE / 2; }
