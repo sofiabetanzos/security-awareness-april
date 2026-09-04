@@ -39,7 +39,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .masthead::before { content: ""; }
 .title-lockup { text-align: center; }
-.title-lockup p { margin: 0 0 3px; color: var(--muted); font-weight: 700; font-size: .68rem; letter-spacing: .13em; text-transform: uppercase; }
 .title-lockup h1 { margin: 0; font: 400 clamp(1.65rem,3.2vw,3rem)/1 "Bungee"; letter-spacing: -.06em; }
 .title-lockup h1 span { color: var(--pink); }
 .hud { display: flex; justify-content: flex-end; gap: clamp(20px,3vw,44px); }
@@ -281,7 +280,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .masthead { grid-template-columns: 1fr; gap: 12px; }
   .masthead::before { display: none; }
   .title-lockup { text-align: left; }
-  .title-lockup p { display: none; }
   .title-lockup h1 { font-size: clamp(1.25rem,7vw,2rem); }
   .hud { grid-column: 1 / -1; justify-content: space-between; padding-top: 9px; border-top: 1px solid #d8d1d4; }
   .game-layout { display: block; padding-top: 12px; }
