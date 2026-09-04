@@ -37,19 +37,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   border-bottom: 1px solid #d8d1d4;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--ink);
-  text-decoration: none;
-  font-weight: 800;
-  font-size: .72rem;
-  line-height: 1.05;
-  letter-spacing: .09em;
-}
-
-.brand-mark { display: grid; place-items: center; width: 37px; height: 37px; color: white; background: var(--pink); font: 400 1.2rem/1 "Bungee"; transform: rotate(-5deg); }
+.masthead::before { content: ""; }
 .title-lockup { text-align: center; }
 .title-lockup p { margin: 0 0 3px; color: var(--muted); font-weight: 700; font-size: .68rem; letter-spacing: .13em; text-transform: uppercase; }
 .title-lockup h1 { margin: 0; font: 400 clamp(1.65rem,3.2vw,3rem)/1 "Bungee"; letter-spacing: -.06em; }
@@ -237,9 +225,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 @media (max-width: 720px) {
   .arcade { padding: 12px 10px 20px; }
-  .masthead { grid-template-columns: auto 1fr; gap: 12px; }
-  .brand { font-size: 0; gap: 0; }
-  .brand-mark { width: 32px; height: 32px; font-size: 1rem; }
+  .masthead { grid-template-columns: 1fr; gap: 12px; }
+  .masthead::before { display: none; }
   .title-lockup { text-align: left; }
   .title-lockup p { display: none; }
   .title-lockup h1 { font-size: clamp(1.25rem,7vw,2rem); }
