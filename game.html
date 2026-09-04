@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f1f2">
+  <meta name="description" content="Prashanth-Man: collect the data, dodge cyber threats, and isolate the malicious QR code.">
+  <title>Prashanth-Man | Security Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="game.css">
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+</head>
+<body>
+  <main class="arcade">
+    <header class="masthead">
+      <a class="brand" href="index.html" aria-label="Back to QR safety lesson">
+        <span class="brand-mark">P</span>
+        <span>SECURITY<br>ARCADE</span>
+      </a>
+      <div class="title-lockup">
+        <p>Collect every point. Dodge the threats.</p>
+        <h1>PRASHANTH<span>–MAN</span></h1>
+      </div>
+      <div class="hud" aria-live="polite">
+        <div><small>SCORE</small><strong id="score">000000</strong></div>
+        <div><small>HIGH</small><strong id="high-score">000000</strong></div>
+      </div>
+    </header>
+
+    <section class="game-layout">
+      <aside class="mission-panel" aria-label="Mission and threat guide">
+        <p class="panel-kicker">YOUR MISSION</p>
+        <h2>Collect all the points.</h2>
+        <p>Grab every grey point before one of the threats catches you.</p>
+
+        <div class="threat-list">
+          <div class="threat"><span class="ghost-chip red">!</span><div><strong>RANSOMWARE</strong><small>Direct pursuit</small></div></div>
+          <div class="threat"><span class="ghost-chip purple">ID</span><div><strong>INSIDER RISK</strong><small>Predicts your route</small></div></div>
+          <div class="threat"><span class="ghost-chip grey">⌁</span><div><strong>SUPPLY CHAIN</strong><small>Unpredictable turns</small></div></div>
+        </div>
+
+        <div class="key-guide">
+          <div class="keys" aria-hidden="true"><i>↑</i><i>↓</i><i>←</i><i>→</i></div>
+          <p><strong>MOVE</strong><br>Arrow keys</p>
+        </div>
+      </aside>
+
+      <div class="cabinet">
+        <div class="cabinet-top">
+          <span id="status-label"><i></i> SYSTEM READY</span>
+          <div class="cabinet-actions">
+            <button id="sound-button" type="button" aria-label="Mute sound" title="Mute sound">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v6h4l5 4V5L9 9H5Zm12.5-.5a5 5 0 0 1 0 7"/></svg>
+            </button>
+            <button id="pause-button" type="button" aria-label="Pause game" title="Pause game">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6v12M16 6v12"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="game-canvas" aria-label="Playable Prashanth-Man game"></div>
+        <div class="mobile-controls" aria-label="Touch controls">
+          <button type="button" data-dir="up" aria-label="Move up">↑</button>
+          <button type="button" data-dir="left" aria-label="Move left">←</button>
+          <span aria-hidden="true"></span>
+          <button type="button" data-dir="right" aria-label="Move right">→</button>
+          <button type="button" data-dir="down" aria-label="Move down">↓</button>
+        </div>
+      </div>
+
+      <aside class="score-panel" aria-label="Objective and points remaining">
+        <div class="qr-mission">
+          <div class="point-cluster" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div><small>YOUR OBJECTIVE</small><strong>COLLECT ALL POINTS</strong><em>+10 EACH</em></div>
+        </div>
+        <div class="counter">
+          <small>POINTS REMAINING</small>
+          <strong id="remaining">---</strong>
+          <span class="counter-rule"></span>
+          <p>Collect every grey point to become a Security Champion.</p>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <noscript><p class="no-script">JavaScript is required to play Prashanth-Man.</p></noscript>
+  <script src="game.js"></script>
+</body>
+</html>

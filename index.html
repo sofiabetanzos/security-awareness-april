@@ -2,291 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security Awareness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#171316">
+  <meta name="description" content="A quick security awareness lesson about QR phishing, followed by Prashanth-Man.">
+  <title>Loading Prashanth-Man…</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --accent: #2563EB;
-      --accent-light: #3B82F6;
-      --accent-bg: #1E3A5F;
-      --black: #0F172A;
-      --white: #FFFFFF;
-      --gray-100: #F1F5F9;
-      --gray-400: #94A3B8;
-      --gray-500: #64748B;
-      --gray-700: #334155;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--black);
-      color: var(--white);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      overflow-x: hidden;
-    }
-
-    .container {
-      max-width: 640px;
-      width: 100%;
-      text-align: center;
-      animation: fadeUp 0.8s ease-out;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent-light);
-      margin-bottom: 1.5rem;
-    }
-
-    .icon {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
-      display: block;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    h1 {
-      font-weight: 700;
-      font-size: 2.5rem;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-    }
-
-    h1 .highlight {
-      color: var(--accent-light);
-    }
-
-    .standfirst {
-      font-weight: 500;
-      font-size: 1.4rem;
-      color: var(--gray-400);
-      margin-bottom: 2.5rem;
-      line-height: 1.5;
-    }
-
-    .card {
-      background: var(--accent-bg);
-      border-radius: 16px;
-      padding: 2rem;
-      text-align: left;
-      margin-bottom: 2rem;
-    }
-
-    .card h2 {
-      font-weight: 600;
-      font-size: 1.125rem;
-      margin-bottom: 1rem;
-      color: var(--white);
-    }
-
-    .card p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: var(--gray-100);
-    }
-
-    .card p + p {
-      margin-top: 1rem;
-    }
-
-    .tips {
-      background: var(--gray-100);
-      border-radius: 16px;
-      padding: 2rem;
-      text-align: left;
-      margin-bottom: 2rem;
-    }
-
-    .tips h2 {
-      font-weight: 600;
-      font-size: 1.125rem;
-      margin-bottom: 1rem;
-      color: var(--black);
-    }
-
-    .tips ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .tips li {
-      font-size: 0.975rem;
-      line-height: 1.6;
-      color: var(--black);
-      padding: 0.5rem 0;
-      padding-left: 1.75rem;
-      position: relative;
-    }
-
-    .tips li::before {
-      content: '\1F6E1\FE0F';
-      position: absolute;
-      left: 0;
-      top: 0.45rem;
-      font-size: 0.85rem;
-    }
-
-    .stat-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gray-500);
-      margin-bottom: 0.75rem;
-    }
-
-    .stat-row {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .stat {
-      flex: 1;
-      background: var(--accent-bg);
-      border-radius: 12px;
-      padding: 1.25rem;
-      text-align: center;
-    }
-
-    .stat .number {
-      font-weight: 700;
-      font-size: 2rem;
-      color: var(--accent-light);
-      display: block;
-    }
-
-    .stat .label {
-      font-size: 0.8rem;
-      color: var(--gray-400);
-      margin-top: 0.25rem;
-      display: block;
-    }
-
-    .divider {
-      width: 48px;
-      height: 3px;
-      background: var(--accent);
-      border-radius: 2px;
-      margin: 2.5rem auto;
-    }
-
-    .footer-note {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--gray-500);
-      line-height: 1.6;
-    }
-
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.75rem;
-      }
-
-      .standfirst {
-        font-size: 1.05rem;
-      }
-
-      .stat-row {
-        flex-direction: column;
-      }
-
-      .card, .tips {
-        padding: 1.5rem;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="trap.css">
 </head>
 <body>
-  <div class="container">
-    <span class="eyebrow">&#x1F6E1;&#xFE0F; April Attack Awareness 2026</span>
-    <span class="icon" role="img" aria-label="fishing rod">&#127907;</span>
-    <h1>Gotcha! <span style="white-space:nowrap">&#129325;&#129325;&#129325;</span><br>You took the <span class="highlight">bait.</span></h1>
-    <p class="standfirst">
-      thanks for scanning, and for your curiosity! but you just scanned a rando QR code with 0 hesitation &mdash; and a threat actor would love that.
-    </p>
-
-    <div class="card">
-      <h2>so&hellip; what just happened?</h2>
-      <p>
-        This QR code was planted around the office by your Security team as part of our April Attack Awareness campaign.
-      </p>
-      <p>
-        In the wild, a QR code like this can send you to a fake login page, kick off a malware download, or connect you to an attacker's network.
-      </p>
-    </div>
-
-    <div class="tips">
-      <h2>next time, hit pause and ask:</h2>
-      <ul>
-        <li>Do I know who placed this QR code and why?</li>
-        <li>Would I click this link if it came in an email from a stranger?</li>
-      </ul>
-    </div>
-
-    <p class="stat-label">Global phishing stats &mdash; not company-specific</p>
-    <div class="stat-row">
-      <div class="stat">
-        <span class="number">5&times;</span>
-        <span class="label">increase in QR phishing attacks in 2025</span>
+  <main class="trap-shell">
+    <section id="loading" class="loading-screen" aria-live="polite">
+      <div class="scan-grid" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <i></i>
       </div>
-      <div class="stat">
-        <span class="number">60%</span>
-        <span class="label">higher click rate on AI-crafted phishing</span>
+      <p class="kicker">SECURE ARCADE // BUILD 04.26</p>
+      <h1>Loading<br><em>Prashanth-Man</em></h1>
+      <div class="progress" aria-label="Loading game"><span></span></div>
+      <p class="system-copy"><span class="status-dot"></span> Initializing game assets…</p>
+    </section>
+
+    <section id="lesson" class="lesson" hidden aria-live="assertive">
+      <div class="alarm-stripe" aria-hidden="true"></div>
+      <div class="lesson-content">
+        <div class="gotcha-lockup">
+          <span class="eyebrow">You scanned it.</span>
+          <h1>GOTCHA!</h1>
+        </div>
+        <p class="lead">You trusted a QR code you didn’t verify.</p>
+
+        <div class="lesson-card lesson-card--compact">
+          <p><strong>QR codes can hide fake sign-ins or malware.</strong> Pause, check the source, and preview the link.</p>
+        </div>
+
+        <a class="play-button" href="game.html">
+          <span>Play the real game</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M14 7l5 5-5 5"/></svg>
+        </a>
+        <p class="fine-print">This was a test from Security to make sure you’re up.</p>
       </div>
-      <div class="stat">
-        <span class="number">$4.88M</span>
-        <span class="label">avg cost of a phishing breach</span>
-      </div>
-    </div>
+    </section>
+  </main>
 
-    <div class="card">
-      <h2>see anything sus recently? &#128064;</h2>
-      <p>
-        Message the Security team on Google Chat or come say hi on the 7th floor. The only bad report is the one you didn't make.
-      </p>
-    </div>
+  <script>
+    const loading = document.getElementById('loading');
+    const lesson = document.getElementById('lesson');
 
-    <div class="divider"></div>
-
-    <p class="footer-note">
-      &#x1F6E1;&#xFE0F; Security Engineering &middot; April 2026<br>
-      Don't be an April Fool &mdash; think before you scan.
-    </p>
-  </div>
+    window.setTimeout(() => {
+      loading.classList.add('is-leaving');
+      window.setTimeout(() => {
+        loading.hidden = true;
+        lesson.hidden = false;
+        document.body.classList.add('revealed');
+        document.title = 'Gotcha! | QR Phishing Awareness';
+        lesson.focus?.();
+      }, 260);
+    }, 2000);
+  </script>
 </body>
 </html>
