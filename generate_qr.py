@@ -9,7 +9,7 @@ from qrcode.image.styles.moduledrawers import RoundedModuleDrawer
 from qrcode.image.styles.colormasks import SolidFillColorMask
 from PIL import Image, ImageDraw
 
-DEFAULT_URL = "https://sofiabetanzos.github.io/security-awareness-april/"
+DEFAULT_URL = "https://sofiabetanzos.github.io/security-awareness-april/?v=prashanth-man"
 BRAND_PINK = "#D11269"
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
 brand_rgb = tuple(bytes.fromhex(BRAND_PINK.lstrip("#")))

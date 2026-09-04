@@ -35,7 +35,7 @@ The high score is saved locally in the browser. A collision ends the game; colle
 
 ## Presentation QR
 
-`generate_qr.py` creates `qr-code.png` using the project magenta `#d11269`. The destination is the GitHub Pages URL in the script's `URL` constant.
+`generate_qr.py` creates `qr-code.png` using the project magenta `#d11269`. The destination is the versioned GitHub Pages URL in the script's `DEFAULT_URL` constant so phones do not reuse the older April Awareness page from cache.
 
 ```bash
 python3 -m pip install -r requirements.txt
